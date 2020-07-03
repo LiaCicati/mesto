@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesto Russia</title>
+  <link rel="stylesheet" href="pages/index.css" />
+  <link rel="icon" href="images/place.png" />
+</head>
+
+<body class="page">
+  <header class="header page__header section">
+    <div class="logo header__logo">
+      <img src="./images/logo.svg" alt="Логотип" class="logo__image" />
+    </div>
+  </header>
+  <main class="content">
+    <section class="profile section">
+      <img src="./images/avatar.jpg" alt="Аватар" class="profile__avatar" />
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button" aria-label="Редактировать">
+        </button>
+        <p class="profile__job">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button" aria-label="Добавить">
+      </button>
+    </section>
+
+    <section class="elements section">
+      <ul class="elements__list">
+        <li class="element">
+          <img class="element__image" src="images/place1.jpg" alt="Карачаевск" />
+          <div class="element__description">
+            <h2 class="element__title">Карачаевск</h2>
+            <button class="element__like-button" aria-label="Лайк"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/place2.jpg" alt="Гора Эльбрус" />
+          <div class="element__description">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__like-button" aria-label="Лайк"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/place3.jpg" alt="Домбай" />
+          <div class="element__description">
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__like-button" aria-label="Лайк"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/place4.jpg" alt="Куршская коса" />
+          <div class="element__description">
+            <h2 class="element__title">Куршская коса</h2>
+            <div class="element_likes">
+              <button class="element__like-button" aria-label="Лайк"></button>
+            </div>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/place5.jpg" alt="Кра́сная пло́щадь" />
+          <div class="element__description">
+            <h2 class="element__title">Кра́сная пло́щадь</h2>
+            <button class="element__like-button" aria-label="Лайк"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img class="element__image" src="images/place6.jpg" alt="Алтай" />
+          <div class="element__description">
+            <h2 class="element__title">Алтай</h2>
+            <button class="element__like-button" aria-label="Лайк"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer section page__footer">
+    <h3 class="footer__copyright">&#169; 2020 Mesto Russia</h3>
+  </footer>
+
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button" aria-label="Закрыть">
+      </button>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form class="popup__form" action="#" name="popup-form">
+        <input class="popup__text popup__text_name" name="popup-name" type="text" placeholder="Введите имя"
+          minlength="2" maxlength="25" required />
+        <input class="popup__text popup__text_job" name="popup-job" type="text" placeholder="Введите описание"
+          minlength="2" maxlength="35" required />
+        <button type="submit" name="submit" class="popup__save-button" aria-label="Сохранить">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>
