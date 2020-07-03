@@ -9,3 +9,7 @@
         width: 104px;
     }
 }
+
+.logo__image:hover {
+    background: #000000;
+}
