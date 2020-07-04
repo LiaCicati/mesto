@@ -10,10 +10,11 @@ let profileJob = content.querySelector(".profile__job");
 
 function togglePopup() {
 
-    if (popup.classList.toggle("popup_opened"));
-
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+    popup.classList.toggle("popup_opened");
+    if (popup.classList.contains("popup_opened")) {
+        nameInput.value = profileName.textContent;
+        jobInput.value = profileJob.textContent;
+    }
 }
 
 function formSubmitHandler(evt) {
@@ -27,8 +28,6 @@ function formSubmitHandler(evt) {
 }
 
 
-
 openPopupButton.addEventListener("click", togglePopup)
 closePopupButton.addEventListener("click", togglePopup)
-
 form.addEventListener("submit", formSubmitHandler);
