@@ -1,4 +1,4 @@
-.logo__image {
+.header__logo {
     max-width: 100%;
     max-height: 100%;
     margin-bottom: 40px;
@@ -6,12 +6,8 @@
 }
 
 @media screen and (max-width: 425px) {
-    .logo__image {
+    .header__logo {
         width: 104px;
         margin-bottom: 32px;
     }
-}
-
-.logo__image:hover {
-    background: #000000;
 }
