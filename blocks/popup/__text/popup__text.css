@@ -17,3 +17,13 @@
 .popup__text:last-of-type {
     margin: 0;
 }
+
+
+@media screen and (max-width: 425px) {
+    .popup__text {
+        padding: 0 0 12px 0;
+        margin-bottom: 20px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

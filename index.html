@@ -15,84 +15,80 @@
   </header>
   <main class="content">
     <section class="profile section">
-      <img src="./images/avatar.jpg" alt="Аватар" class="profile__avatar" />
+      <img src="./images/profileAvatar.jpg" alt="Аватар" class="profile__avatar" />
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 class="profile__name">Лиа Чикати</h1>
         <button class="profile__edit-button" aria-label="Редактировать" type="button"></button>
-        <p class="profile__job">Исследователь океана</p>
+        <p class="profile__job">Студент Яндекс Практикум</p>
       </div>
       <button class="profile__add-button" aria-label="Добавить" type="button"></button>
     </section>
 
     <section class="elements section">
       <ul class="elements__list">
-        <li class="element">
-          <img class="element__image" src="images/place1.jpg" alt="Карачаевск" />
-          <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like-button" aria-label="Лайк" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/place2.jpg" alt="Гора Эльбрус" />
-          <div class="element__description">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-button" aria-label="Лайк" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/place3.jpg" alt="Домбай" />
-          <div class="element__description">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like-button" aria-label="Лайк" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/place4.jpg" alt="Куршская коса" />
-          <div class="element__description">
-            <h2 class="element__title">Куршская коса</h2>
-            <div class="element_likes">
-              <button class="element__like-button" aria-label="Лайк" type="button"></button>
-            </div>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/place5.jpg" alt="Кра́сная пло́щадь" />
-          <div class="element__description">
-            <h2 class="element__title">Кра́сная пло́щадь</h2>
-            <button class="element__like-button" aria-label="Лайк" type="button"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/place6.jpg" alt="Алтай" />
-          <div class="element__description">
-            <h2 class="element__title">Алтай</h2>
-            <button class="element__like-button" aria-label="Лайк" type="button"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
+
   </main>
 
   <footer class="footer section page__footer">
-    <h3 class="footer__copyright">&#169; 2020 Mesto Russia</h3>
+    <h3 class="footer__copyright">&#169; 2020 Лиа Чикати</h3>
   </footer>
 
-  <div class="popup">
+  <!--Popup Edit-->
+  <div class="popup popup_edit">
     <div class="popup__container">
-      <button class="popup__close-button" aria-label="Закрыть" type="submit"></button>
+      <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" action="#" name="popup-form">
         <input class="popup__text popup__text_name" name="popup-name" type="text" placeholder="Введите имя"
           minlength="2" maxlength="25" required />
         <input class="popup__text popup__text_job" name="popup-job" type="text" placeholder="Введите описание"
           minlength="2" maxlength="35" required />
-        <button type="submit" name="submit" class="popup__save-button" aria-label="Сохранить">
+        <button type="submit" name="submit" class="popup__submit-button" aria-label="Сохранить">
           Сохранить
         </button>
       </form>
     </div>
   </div>
+
+
+  <!--Popup Place-->
+  <div class="popup popup_place">
+    <div class="popup__container">
+      <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
+      <h3 class="popup__title">Новое место</h3>
+      <form class="popup__form" action="#" name="popup-form">
+        <input class="popup__text popup__text_place" type="text" name="title" value="" placeholder="Название"
+          minlength="2" maxlength="30" required />
+        <input class="popup__text popup__text_link" type="url" name="link" value="" placeholder="Ссылка на картинку"
+          required />
+        <button type="submit" name="submit" class="popup__submit-button" aria-label="Создать">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <!--Popup Image-->
+  <div class="popup popup_image">
+    <div class="popup__content">
+      <img class="popup__image" src="#" alt="Фото места">
+      <p class="popup__caption"></p>
+      <button class="popup__close-button"></button>
+    </div>
+  </div>
+
+
+  <template id="elements-template">
+    <li class="element">
+      <img class="element__image" src="#" alt="Фото места" />
+      <div class="element__description">
+        <h2 class="element__title">Карачаевск</h2>
+        <button class="element__like-button" aria-label="Лайк" type="button"></button>
+      </div>
+      <button class="element__delete-button" type="button" aria-label="Удалить"></button>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>

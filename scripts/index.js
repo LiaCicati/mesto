@@ -1,17 +1,66 @@
-let content = document.querySelector(".content");
-let openPopupButton = document.querySelector(".profile__edit-button");
-let closePopupButton = document.querySelector(".popup__close-button");
-let popup = document.querySelector(".popup");
-let form = popup.querySelector(".popup__form");
-let nameInput = form.querySelector(".popup__text_name");
-let jobInput = form.querySelector(".popup__text_job");
-let profileName = content.querySelector(".profile__name");
-let profileJob = content.querySelector(".profile__job");
+const content = document.querySelector(".content");
+const profile = content.querySelector('.profile');
+const profileName = profile.querySelector(".profile__name");
+const profileJob = profile.querySelector(".profile__job");
+const popup = document.querySelector('.popup');
+const form = popup.querySelector(".popup__form");
+const openPopupEdit = profile.querySelector(".profile__edit-button");
+const closePopupEdit = document.querySelector(".popup__close-button");
+const popupEdit = document.querySelector(".popup_edit");
+const formElementEdit = popupEdit.querySelector(".popup__form");
+const nameInput = formElementEdit.querySelector(".popup__text_name");
+const jobInput = formElementEdit.querySelector(".popup__text_job");
+const openPopupAdd = document.querySelector(".profile__add-button");
+const popupAdd = document.querySelector(".popup_place");
+const formElementAdd = popupAdd.querySelector(".popup__form");
+const closePopupAdd = popupAdd.querySelector(".popup__close-button");
+const popupAddSave = popupAdd.querySelector(".popup__submit-button");
+const inputTitle = popupAdd.querySelector('.popup__text_place');
+const inputLink = popupAdd.querySelector('.popup__text_link');
+const elementsTemplate = document.querySelector('#elements-template').content;
+const elementsList = content.querySelector(".elements__list");
+const deleteButton = document.querySelector(".element__delete-button");
+const popupImage = document.querySelector('.popup_image');
+const placeImage = popupImage.querySelector('.popup__image');
+const placeTitle = popupImage.querySelector('.popup__caption');
+const closePopupImage = popupImage.querySelector(".popup__close-button");
 
-function togglePopup() {
+const initialCards = [{
+        name: 'Хиби́ны',
+        link: 'https://images.unsplash.com/photo-1518675013095-1cef34ac232e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80',
+        alt: 'Хиби́ны'
+    },
+    {
+        name: 'Башкирия',
+        link: 'https://images.unsplash.com/photo-1482355383105-63c565658bab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2214&q=80',
+        alt: 'Башкирия'
+    },
+    {
+        name: 'Ольхо́н',
+        link: 'https://images.unsplash.com/photo-1490879112094-281fea0883dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+        alt: 'Ольхо́н'
+    },
+    {
+        name: 'Магадан',
+        link: 'https://images.unsplash.com/photo-1570340831042-040b3999690c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80',
+        alt: 'Магадан'
+    },
+    {
+        name: 'Озеро Байкал',
+        link: 'https://images.unsplash.com/photo-1551844931-9c422b3f8a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=935&q=80',
+        alt: 'Озеро Байкал'
+    },
+    {
+        name: 'Алтай',
+        link: 'https://images.unsplash.com/photo-1494791286225-ea86fc957ba7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3294&q=80',
+        alt: 'Алтай'
+    }
+];
 
+
+function togglePopup(popup) {
     popup.classList.toggle("popup_opened");
-    if (popup.classList.contains("popup_opened")) {
+    if (popupEdit.classList.contains("popup_opened")) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
     }
@@ -23,11 +72,56 @@ function formSubmitHandler(evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    togglePopup();
+    togglePopup(popup);
+}
 
+function showImagePopup(evt) {
+    const clickedImage = evt.target;
+    togglePopup(popupImage);
+
+    popupImage.querySelector('.popup__image').src = clickedImage.src;
+    popupImage.querySelector('.popup__caption').textContent = clickedImage.parentElement.querySelector('.element__title').textContent;
+};
+
+
+function addCard(name, link) {
+
+    const placesCard = elementsTemplate.cloneNode(true);
+    placesCard.querySelector(".element__image").src = link;
+    placesCard.querySelector(".element__title").textContent = name;
+    placesCard.querySelector('.element__image').addEventListener('click', showImagePopup);
+    placesCard.querySelector('.element__like-button').addEventListener('click', (evt) => {
+        evt.target.classList.toggle('element__like-button_active');
+    });
+
+    placesCard.querySelector('.element__delete-button').addEventListener('click', (evt) => {
+        evt.target.parentElement.remove();
+    });
+
+    elementsList.prepend(placesCard);
 }
 
 
-openPopupButton.addEventListener("click", togglePopup)
-closePopupButton.addEventListener("click", togglePopup)
+initialCards.forEach(item => elementsList.append(addCard(item.name, item.link)));
+
+
+function formSubmitHandlerCard(evt) {
+    evt.preventDefault();
+
+    let name = inputTitle.value;
+    let link = inputLink.value;
+
+    addCard(name, link);
+
+    togglePopup(popupAdd);
+}
+
+
+openPopupEdit.addEventListener("click", () => togglePopup(popupEdit));
+openPopupAdd.addEventListener("click", () => togglePopup(popupAdd));
+closePopupEdit.addEventListener("click", () => togglePopup(popupEdit));
+closePopupAdd.addEventListener("click", () => togglePopup(popupAdd));
+closePopupImage.addEventListener("click", () => togglePopup(popupImage));
+
 form.addEventListener("submit", formSubmitHandler);
+popupAdd.addEventListener('submit', formSubmitHandlerCard);
