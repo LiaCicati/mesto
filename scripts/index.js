@@ -102,7 +102,8 @@ function addCard(name, link) {
 }
 
 
-initialCards.forEach(item => elementsList.append(addCard(item.name, item.link)));
+initialCards.forEach(item => (addCard(item.name, item.link)));
+
 
 
 function formSubmitHandlerCard(evt) {
