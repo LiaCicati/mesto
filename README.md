@@ -13,7 +13,7 @@
 ---
 
 - ### Ссылка на сайт :
-  [ Site ](https://liacicati.github.io/mesto/)
+  [ Mesto Russia ](https://liacicati.github.io/mesto/)
 
 ## Дополнительная информация:
 

@@ -101,10 +101,7 @@ function addCard(name, link) {
     elementsList.prepend(placesCard);
 }
 
-
 initialCards.forEach(item => (addCard(item.name, item.link)));
-
-
 
 function formSubmitHandlerCard(evt) {
     evt.preventDefault();
