@@ -95,7 +95,7 @@ function addCard(nameValue, linkValue) {
     });
 
     placesCard.querySelector('.element__delete-button').addEventListener('click', (evt) => {
-        evt.target.parentElement.remove();
+        evt.target.closest(".element").remove();
     });
 
     elementsList.prepend(placesCard);
