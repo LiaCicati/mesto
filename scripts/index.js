@@ -84,11 +84,11 @@ function showImagePopup(evt) {
 };
 
 
-function addCard(name, link) {
+function addCard(nameValue, linkValue) {
 
     const placesCard = elementsTemplate.cloneNode(true);
-    placesCard.querySelector(".element__image").src = link;
-    placesCard.querySelector(".element__title").textContent = name;
+    placesCard.querySelector(".element__image").src = linkValue;
+    placesCard.querySelector(".element__title").textContent = nameValue;
     placesCard.querySelector('.element__image').addEventListener('click', showImagePopup);
     placesCard.querySelector('.element__like-button').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__like-button_active');
