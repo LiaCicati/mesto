@@ -66,6 +66,20 @@ function togglePopup(popup) {
     }
 }
 
+
+const closeByOverlay = (evt) => {
+    if (evt.target.classList.contains('popup')) {
+        togglePopup(document.querySelector('.popup_opened'));
+    }
+};
+
+function closeOnEsc(evt) {
+    if (evt.key === 'Escape') {
+        togglePopup(document.querySelector('.popup_opened'));
+    }
+}
+
+
 function formSubmitHandler(evt) {
     evt.preventDefault();
 
@@ -96,6 +110,7 @@ function addCard(nameValue, linkValue) {
 
     placesCard.querySelector('.element__delete-button').addEventListener('click', (evt) => {
         evt.target.closest(".element").remove();
+
     });
 
     elementsList.prepend(placesCard);
@@ -114,12 +129,14 @@ function formSubmitHandlerCard(evt) {
     togglePopup(popupAdd);
 }
 
-
 openPopupEdit.addEventListener("click", () => togglePopup(popupEdit));
 openPopupAdd.addEventListener("click", () => togglePopup(popupAdd));
 closePopupEdit.addEventListener("click", () => togglePopup(popupEdit));
 closePopupAdd.addEventListener("click", () => togglePopup(popupAdd));
 closePopupImage.addEventListener("click", () => togglePopup(popupImage));
+
+document.addEventListener('click', closeByOverlay);
+document.addEventListener('keydown', closeOnEsc);
 
 form.addEventListener("submit", formSubmitHandler);
 popupAdd.addEventListener('submit', formSubmitHandlerCard);
