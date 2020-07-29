@@ -64,7 +64,7 @@ function togglePopup(popup) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
     }
-}
+};
 
 
 const closeByOverlay = (evt) => {
@@ -77,7 +77,7 @@ function closeOnEsc(evt) {
     if (evt.key === 'Escape') {
         togglePopup(document.querySelector('.popup_opened'));
     }
-}
+};
 
 
 function formSubmitHandler(evt) {
@@ -87,7 +87,7 @@ function formSubmitHandler(evt) {
     profileJob.textContent = jobInput.value;
 
     togglePopup(popup);
-}
+};
 
 function showImagePopup(evt) {
     const clickedImage = evt.target;

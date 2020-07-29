@@ -9,11 +9,10 @@
     cursor: initial;
 }
 
+
 @media screen and (max-width: 425px) {
     .popup__container {
         width: 240px;
-
         padding: 30px 20px 30px;
-
     }
 }

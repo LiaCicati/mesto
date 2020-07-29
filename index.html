@@ -42,13 +42,17 @@
       <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" action="#" name="popup-form" novalidate>
-        <input class="popup__text popup__text_name" id='name-input' name="popup-name" type="text"
-          placeholder="Введите имя" minlength="2" maxlength="40" required />
-        <span class="popup__input-error" id='name-input-error'></span>
-        <input class="popup__text popup__text_job" id='job-input' name="popup-job" type="text"
-          placeholder="Введите описание" minlength="2" maxlength="200" required />
-        <span class='popup__input-error' id='job-input-error'></span>
-        <button type="submit" name="submit" class="popup__submit-button " aria-label="Сохранить">
+        <div class="popup__input">
+          <input class="popup__text popup__text_name" id='name-input' name="popup-name" type="text"
+            placeholder="Введите имя" minlength="2" maxlength="40" required />
+          <span class="popup__input-error" id='name-input-error'></span>
+        </div>
+        <div class="popup__input">
+          <input class="popup__text popup__text_job" id='job-input' name="popup-job" type="text"
+            placeholder="Введите описание" minlength="2" maxlength="200" required />
+          <span class='popup__input-error' id='job-input-error'></span>
+        </div>
+        <button type="submit" name="submit" class="popup__submit-button" aria-label="Сохранить">
           Сохранить
         </button>
       </form>
@@ -62,12 +66,16 @@
       <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
       <h3 class="popup__title">Новое место</h3>
       <form class="popup__form" action="#" name="popup-form" novalidate>
-        <input class="popup__text popup__text_place" id='title-input' type="text" name="title" value=""
-          placeholder="Название" minlength="1" maxlength="30" required />
-        <span class='popup__input-error' id='title-input-error'></span>
-        <input class="popup__text popup__text_link" id='link-input' type="url" name="link" value=""
-          placeholder="Ссылка на картинку" required />
-        <span class='popup__input-error' id='link-input-error'></span>
+        <div class="popup__input">
+          <input class="popup__text popup__text_place" id='title-input' type="text" name="title" value=""
+            placeholder="Название" minlength="1" maxlength="30" required />
+          <span class='popup__input-error' id='title-input-error'></span>
+        </div>
+        <div class="popup__input">
+          <input class="popup__text popup__text_link" id='link-input' type="url" name="link" value=""
+            placeholder="Ссылка на картинку" required />
+          <span class='popup__input-error' id='link-input-error'></span>
+        </div>
         <button type="submit" name="submit" class="popup__submit-button " aria-label="Создать">Создать</button>
       </form>
     </div>
