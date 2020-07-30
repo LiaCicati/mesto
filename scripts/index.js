@@ -1,30 +1,30 @@
-const content = document.querySelector(".content");
+const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
-const profileName = profile.querySelector(".profile__name");
-const profileJob = profile.querySelector(".profile__job");
+const profileName = profile.querySelector('.profile__name');
+const profileJob = profile.querySelector('.profile__job');
 const popup = document.querySelector('.popup');
-const form = popup.querySelector(".popup__form");
-const openPopupEdit = profile.querySelector(".profile__edit-button");
-const popupEditSave = document.querySelector(".popup__submit-button");
-const closePopupEdit = document.querySelector(".popup__close-button");
-const popupEdit = document.querySelector(".popup_edit");
-const formElementEdit = popupEdit.querySelector(".popup__form");
-const nameInput = formElementEdit.querySelector(".popup__text_name");
-const jobInput = formElementEdit.querySelector(".popup__text_job");
-const openPopupAdd = document.querySelector(".profile__add-button");
-const popupAdd = document.querySelector(".popup_place");
-const formElementAdd = popupAdd.querySelector(".popup__form");
-const closePopupAdd = popupAdd.querySelector(".popup__close-button");
-const popupAddSave = popupAdd.querySelector(".popup__submit-button");
+const form = popup.querySelector('.popup__form');
+const openPopupEdit = profile.querySelector('.profile__edit-button');
+const popupEditSave = document.querySelector('.popup__submit-button');
+const closePopupEdit = document.querySelector('.popup__close-button');
+const popupEdit = document.querySelector('.popup_edit');
+const formElementEdit = popupEdit.querySelector('.popup__form');
+const nameInput = formElementEdit.querySelector('.popup__text_name');
+const jobInput = formElementEdit.querySelector('.popup__text_job');
+const openPopupAdd = document.querySelector('.profile__add-button');
+const popupAdd = document.querySelector('.popup_place');
+const formElementAdd = popupAdd.querySelector('.popup__form');
+const closePopupAdd = popupAdd.querySelector('.popup__close-button');
+const popupAddSave = popupAdd.querySelector('.popup__submit-button');
 const inputTitle = popupAdd.querySelector('.popup__text_place');
 const inputLink = popupAdd.querySelector('.popup__text_link');
 const elementsTemplate = document.querySelector('#elements-template').content;
-const elementsList = content.querySelector(".elements__list");
-const deleteButton = document.querySelector(".element__delete-button");
+const elementsList = content.querySelector('.elements__list');
+const deleteButton = document.querySelector('.element__delete-button');
 const popupImage = document.querySelector('.popup_image');
 const placeImage = popupImage.querySelector('.popup__image');
 const placeTitle = popupImage.querySelector('.popup__caption');
-const closePopupImage = popupImage.querySelector(".popup__close-button");
+const closePopupImage = popupImage.querySelector('.popup__close-button');
 
 const initialCards = [{
         name: 'Хиби́ны',
@@ -60,8 +60,8 @@ const initialCards = [{
 
 
 function togglePopup(popup) {
-    popup.classList.toggle("popup_opened");
-    if (popupEdit.classList.contains("popup_opened")) {
+    popup.classList.toggle('popup_opened');
+    if (popupEdit.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
         popupEditSave.classList.remove('popup__submit-button_disabled');
@@ -104,15 +104,15 @@ function showImagePopup(evt) {
 function addCard(nameValue, linkValue) {
 
     const placesCard = elementsTemplate.cloneNode(true);
-    placesCard.querySelector(".element__image").src = linkValue;
-    placesCard.querySelector(".element__title").textContent = nameValue;
+    placesCard.querySelector('.element__image').src = linkValue;
+    placesCard.querySelector('.element__title').textContent = nameValue;
     placesCard.querySelector('.element__image').addEventListener('click', showImagePopup);
     placesCard.querySelector('.element__like-button').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__like-button_active');
     });
 
     placesCard.querySelector('.element__delete-button').addEventListener('click', (evt) => {
-        evt.target.closest(".element").remove();
+        evt.target.closest('.element').remove();
 
     });
 
@@ -132,14 +132,14 @@ function formSubmitHandlerCard(evt) {
     togglePopup(popupAdd);
 }
 
-openPopupEdit.addEventListener("click", () => togglePopup(popupEdit));
-openPopupAdd.addEventListener("click", () => togglePopup(popupAdd));
-closePopupEdit.addEventListener("click", () => togglePopup(popupEdit));
-closePopupAdd.addEventListener("click", () => togglePopup(popupAdd));
-closePopupImage.addEventListener("click", () => togglePopup(popupImage));
+openPopupEdit.addEventListener('click', () => togglePopup(popupEdit));
+openPopupAdd.addEventListener('click', () => togglePopup(popupAdd));
+closePopupEdit.addEventListener('click', () => togglePopup(popupEdit));
+closePopupAdd.addEventListener('click', () => togglePopup(popupAdd));
+closePopupImage.addEventListener('click', () => togglePopup(popupImage));
 
 document.addEventListener('click', closeByOverlay);
 document.addEventListener('keydown', closeOnEsc);
 
-popupEdit.addEventListener("submit", formSubmitHandler);
+popupEdit.addEventListener('submit', formSubmitHandler);
 popupAdd.addEventListener('submit', formSubmitHandlerCard);
