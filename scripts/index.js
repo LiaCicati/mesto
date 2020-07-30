@@ -78,12 +78,18 @@ function togglePopup(popup) {
 const closeByOverlay = (evt) => {
     if (evt.target.classList.contains('popup')) {
         togglePopup(document.querySelector('.popup_opened'));
+
+        hideInputError(popupAdd, inputLink, object);
+        hideInputError(popupAdd, inputTitle, object);
     }
 };
 
 function closeOnEsc(evt) {
     if (evt.key === 'Escape') {
         togglePopup(document.querySelector('.popup_opened'));
+
+        hideInputError(popupAdd, inputLink, object);
+        hideInputError(popupAdd, inputTitle, object);
     }
 };
 
