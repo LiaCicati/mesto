@@ -1,13 +1,3 @@
-const validationParameters = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__text',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_disabled',
-    inputErrorClass: 'popup__text_type_error',
-    errorClass: 'popup__input-error_active'
-};
-
-
 const showInputError = (formElement, inputElement, errorMessage, el) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(el.inputErrorClass);
@@ -47,11 +37,6 @@ const toggleButtonState = (inputList, buttonElement, el) => {
     }
 };
 
-const toggleButtonStateOnForm = (formElement, buttonElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(validationParameters.inputSelector));
-    toggleButtonState(inputList, buttonElement, validationParameters.inactiveButtonClass);
-};
-
 
 
 const setEventListeners = (formElement, el) => {
@@ -78,4 +63,11 @@ const enableValidation = (el) => {
     });
 };
 
-enableValidation(validationParameters);
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__text',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputErrorClass: 'popup__text_type_error',
+    errorClass: 'popup__input-error_active'
+});

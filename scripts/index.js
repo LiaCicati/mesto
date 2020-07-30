@@ -5,6 +5,7 @@ const profileJob = profile.querySelector(".profile__job");
 const popup = document.querySelector('.popup');
 const form = popup.querySelector(".popup__form");
 const openPopupEdit = profile.querySelector(".profile__edit-button");
+const popupEditSave = document.querySelector(".popup__submit-button");
 const closePopupEdit = document.querySelector(".popup__close-button");
 const popupEdit = document.querySelector(".popup_edit");
 const formElementEdit = popupEdit.querySelector(".popup__form");
@@ -63,6 +64,8 @@ function togglePopup(popup) {
     if (popupEdit.classList.contains("popup_opened")) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
+        popupEditSave.classList.remove('popup__submit-button_disabled');
+        popupEditSave.removeAttribute('disabled');
     }
 };
 
@@ -86,7 +89,7 @@ function formSubmitHandler(evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    togglePopup(popup);
+    togglePopup(popupEdit);
 };
 
 function showImagePopup(evt) {
@@ -138,5 +141,5 @@ closePopupImage.addEventListener("click", () => togglePopup(popupImage));
 document.addEventListener('click', closeByOverlay);
 document.addEventListener('keydown', closeOnEsc);
 
-form.addEventListener("submit", formSubmitHandler);
+popupEdit.addEventListener("submit", formSubmitHandler);
 popupAdd.addEventListener('submit', formSubmitHandlerCard);
