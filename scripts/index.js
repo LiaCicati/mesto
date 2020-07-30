@@ -64,9 +64,14 @@ function togglePopup(popup) {
     if (popupEdit.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
-        popupEditSave.classList.remove('popup__submit-button_disabled');
-        popupEditSave.removeAttribute('disabled');
-    }
+    };
+
+
+    popupEditSave.classList.remove('popup__submit-button_disabled');
+    popupEditSave.removeAttribute('disabled');
+    hideInputError(popupEdit, nameInput, object);
+    hideInputError(popupEdit, jobInput, object);
+    document.getElementById('myForm').reset();
 };
 
 
@@ -113,10 +118,10 @@ function addCard(nameValue, linkValue) {
 
     placesCard.querySelector('.element__delete-button').addEventListener('click', (evt) => {
         evt.target.closest('.element').remove();
-
     });
 
     elementsList.prepend(placesCard);
+
 }
 
 initialCards.forEach(item => (addCard(item.name, item.link)));
@@ -128,14 +133,16 @@ function formSubmitHandlerCard(evt) {
     const link = inputLink.value;
 
     addCard(name, link);
-
     togglePopup(popupAdd);
+    document.getElementById('myForm').reset();
 }
 
 openPopupEdit.addEventListener('click', () => togglePopup(popupEdit));
 openPopupAdd.addEventListener('click', () => togglePopup(popupAdd));
 closePopupEdit.addEventListener('click', () => togglePopup(popupEdit));
 closePopupAdd.addEventListener('click', () => togglePopup(popupAdd));
+closePopupAdd.addEventListener('click', () => hideInputError(popupAdd, inputLink, object));
+closePopupAdd.addEventListener('click', () => hideInputError(popupAdd, inputTitle, object));
 closePopupImage.addEventListener('click', () => togglePopup(popupImage));
 
 document.addEventListener('click', closeByOverlay);
