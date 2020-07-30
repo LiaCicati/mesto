@@ -1,5 +1,5 @@
 .popup__input-error {
-    transition: .3s;
+    transition: 0.3s;
     opacity: 0;
     font-weight: normal;
     font-size: 12px;
