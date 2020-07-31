@@ -61,10 +61,10 @@ const initialCards = [{
 
 function toggleModal(popup) {
     popup.classList.toggle('popup_opened');
-
 };
 
 function toggleProfileModal(popup) {
+    toggleModal(popup);
     if (popupEdit.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
@@ -75,7 +75,6 @@ function toggleProfileModal(popup) {
     hideInputError(popupEdit, nameInput, object);
     hideInputError(popupEdit, jobInput, object);
 
-    toggleModal(popup);
 };
 
 function toggleAddModal(popup) {
