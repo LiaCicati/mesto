@@ -147,7 +147,7 @@ initialCards.forEach(card => {
 });
 
 
-const formSubmitHandlerCard = evt => {
+function formSubmitHandlerCard(evt) {
     evt.preventDefault();
     const newPlace = {
         name: inputTitle.value,
