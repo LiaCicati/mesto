@@ -1,3 +1,5 @@
+// Здравствуйте, Ролан. Спасибо за рекомендации, код стал намного красивее и понятнее!
+
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -22,8 +24,6 @@ const elementsTemplate = document.querySelector('#elements-template').content;
 const elementsList = content.querySelector('.elements__list');
 const deleteButton = document.querySelector('.element__delete-button');
 const popupImage = document.querySelector('.popup_image');
-const placeImage = popupImage.querySelector('.popup__image');
-const placeTitle = popupImage.querySelector('.popup__caption');
 const closePopupImage = popupImage.querySelector('.popup__close-button');
 
 const initialCards = [{
@@ -59,37 +59,43 @@ const initialCards = [{
 ];
 
 
-function togglePopup(popup) {
+function toggleModal(popup) {
     popup.classList.toggle('popup_opened');
+
+};
+
+function toggleProfileModal(popup) {
     if (popupEdit.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
-    };
-
+    }
 
     popupEditSave.classList.remove('popup__submit-button_disabled');
     popupEditSave.removeAttribute('disabled');
     hideInputError(popupEdit, nameInput, object);
     hideInputError(popupEdit, jobInput, object);
-    document.getElementById('myForm').reset();
+
+    toggleModal(popup);
 };
 
+function toggleAddModal(popup) {
 
-const closeByOverlay = (evt) => {
+    hideInputError(popupAdd, inputLink, object);
+    hideInputError(popupAdd, inputTitle, object);
+    document.getElementById('popupAddForm').reset();
+
+    toggleModal(popup);
+}
+
+function closeByOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
-        togglePopup(document.querySelector('.popup_opened'));
-
-        hideInputError(popupAdd, inputLink, object);
-        hideInputError(popupAdd, inputTitle, object);
+        toggleModal(document.querySelector('.popup_opened'));
     }
 };
 
 function closeOnEsc(evt) {
     if (evt.key === 'Escape') {
-        togglePopup(document.querySelector('.popup_opened'));
-
-        hideInputError(popupAdd, inputLink, object);
-        hideInputError(popupAdd, inputTitle, object);
+        toggleModal(document.querySelector('.popup_opened'));
     }
 };
 
@@ -100,56 +106,65 @@ function formSubmitHandler(evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    togglePopup(popupEdit);
+    toggleProfileModal(popupEdit);
 };
 
 function showImagePopup(evt) {
     const clickedImage = evt.target;
-    togglePopup(popupImage);
-
+    toggleModal(popupImage);
+    // У меня задан alt картинкам в разметке, там прописано «Фото места». Будет правильнее если задать его с помощью js?
     popupImage.querySelector('.popup__image').src = clickedImage.src;
     popupImage.querySelector('.popup__caption').textContent = clickedImage.parentElement.querySelector('.element__title').textContent;
 };
 
+function addCard(initialCards) {
+    const card = elementsTemplate.cloneNode(true);
+    const cardImage = card.querySelector('.element__image');
 
-function addCard(nameValue, linkValue) {
+    cardImage.src = initialCards.link;
+    card.querySelector('.element__title').textContent = initialCards.name;
 
-    const placesCard = elementsTemplate.cloneNode(true);
-    placesCard.querySelector('.element__image').src = linkValue;
-    placesCard.querySelector('.element__title').textContent = nameValue;
-    placesCard.querySelector('.element__image').addEventListener('click', showImagePopup);
-    placesCard.querySelector('.element__like-button').addEventListener('click', (evt) => {
+    card.querySelector('.element__image').addEventListener('click', showImagePopup);
+    card.querySelector('.element__like-button').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__like-button_active');
     });
-
-    placesCard.querySelector('.element__delete-button').addEventListener('click', (evt) => {
+    card.querySelector('.element__delete-button').addEventListener('click', (evt) => {
         evt.target.closest('.element').remove();
     });
 
-    elementsList.prepend(placesCard);
+    popupAddSave.classList.add('popup__submit-button_disabled');
+    popupAddSave.setAttribute('disabled', true);
 
-}
+    return card;
+};
 
-initialCards.forEach(item => (addCard(item.name, item.link)));
+function renderNewCard(card) {
+    const newCard = addCard(card);
+    elementsList.prepend(newCard);
+};
 
-function formSubmitHandlerCard(evt) {
+initialCards.forEach(card => {
+    elementsList.append(addCard(card))
+});
+
+
+const formSubmitHandlerCard = evt => {
     evt.preventDefault();
+    const newPlace = {
+        name: inputTitle.value,
+        link: inputLink.value,
+    };
+    renderNewCard(newPlace);
+    toggleAddModal(popupAdd);
+    document.getElementById('popupAddForm').reset();
+};
 
-    const name = inputTitle.value;
-    const link = inputLink.value;
 
-    addCard(name, link);
-    togglePopup(popupAdd);
-    document.getElementById('myForm').reset();
-}
-
-openPopupEdit.addEventListener('click', () => togglePopup(popupEdit));
-openPopupAdd.addEventListener('click', () => togglePopup(popupAdd));
-closePopupEdit.addEventListener('click', () => togglePopup(popupEdit));
-closePopupAdd.addEventListener('click', () => togglePopup(popupAdd));
-closePopupAdd.addEventListener('click', () => hideInputError(popupAdd, inputLink, object));
-closePopupAdd.addEventListener('click', () => hideInputError(popupAdd, inputTitle, object));
-closePopupImage.addEventListener('click', () => togglePopup(popupImage));
+openPopupEdit.addEventListener('click', () => toggleProfileModal(popupEdit));
+openPopupAdd.addEventListener('click', () => toggleAddModal(popupAdd));
+closePopupEdit.addEventListener('click', () => toggleProfileModal(popupEdit));
+closePopupAdd.addEventListener('click', () => toggleAddModal(popupAdd));
+closePopupImage.addEventListener('click', () => toggleModal(popupImage));
 
 document.addEventListener('click', closeByOverlay);
 document.addEventListener('keydown', closeOnEsc);
