@@ -1,5 +1,3 @@
-// Здравствуйте, Ролан. Спасибо за рекомендации, код стал намного красивее и понятнее!
-
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -58,12 +56,20 @@ const initialCards = [{
     }
 ];
 
-
 function toggleModal(popup) {
+    const isOpen = popup.classList.contains('popup_opened');
+    if (isOpen) {
+        document.removeEventListener('keydown', closeOnEsc)
+        document.removeEventListener('click', closeByOverlay);
+    } else {
+        document.addEventListener('keydown', closeOnEsc)
+        document.addEventListener('click', closeByOverlay);
+    }
     popup.classList.toggle('popup_opened');
-};
+}
 
-function toggleProfileModal(popup) {
+
+function toggleProfileModal(popupEdit) {
     toggleModal(popup);
     if (popupEdit.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
@@ -77,13 +83,13 @@ function toggleProfileModal(popup) {
 
 };
 
-function toggleAddModal(popup) {
+function toggleAddModal(popupAdd) {
 
     hideInputError(popupAdd, inputLink, object);
     hideInputError(popupAdd, inputTitle, object);
     document.getElementById('popupAddForm').reset();
 
-    toggleModal(popup);
+    toggleModal(popupAdd);
 }
 
 function closeByOverlay(evt) {
@@ -111,7 +117,6 @@ function formSubmitHandler(evt) {
 function showImagePopup(evt) {
     const clickedImage = evt.target;
     toggleModal(popupImage);
-    // У меня задан alt картинкам в разметке, там прописано «Фото места». Будет правильнее если задать его с помощью js?
     popupImage.querySelector('.popup__image').src = clickedImage.src;
     popupImage.querySelector('.popup__caption').textContent = clickedImage.parentElement.querySelector('.element__title').textContent;
 };
@@ -164,9 +169,6 @@ openPopupAdd.addEventListener('click', () => toggleAddModal(popupAdd));
 closePopupEdit.addEventListener('click', () => toggleProfileModal(popupEdit));
 closePopupAdd.addEventListener('click', () => toggleAddModal(popupAdd));
 closePopupImage.addEventListener('click', () => toggleModal(popupImage));
-
-document.addEventListener('click', closeByOverlay);
-document.addEventListener('keydown', closeOnEsc);
 
 popupEdit.addEventListener('submit', formSubmitHandler);
 popupAdd.addEventListener('submit', formSubmitHandlerCard);
