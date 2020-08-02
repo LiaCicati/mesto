@@ -36,23 +36,23 @@
     <h3 class="footer__copyright">&#169; 2020 Лиа Чикати</h3>
   </footer>
 
-  <!--Popup Edit-->
-  <div class="popup popup_edit">
-    <div class="popup__container">
-      <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
-      <h3 class="popup__title">Редактировать профиль</h3>
-      <form class="popup__form" action="#" name="popup-form" novalidate>
-        <label class="popup__input">
-          <input class="popup__text popup__text_name" id='name-input' name="popup-name" type="text"
+  <!--Modal Edit-->
+  <div class="modal modal_edit">
+    <div class="modal__container">
+      <button class="modal__close-button" aria-label="Закрыть" type="button"></button>
+      <h3 class="modal__title">Редактировать профиль</h3>
+      <form class="modal__form" action="#" name="modal-form" novalidate>
+        <label class="modal__input">
+          <input class="modal__text modal__text_name" id='name-input' name="modal-name" type="text"
             placeholder="Введите имя" minlength="2" maxlength="40" autocomplete="off" required />
-          <span class="popup__input-error" id='name-input-error'></span>
+          <span class="modal__input-error" id='name-input-error'></span>
         </label>
-        <label class="popup__input">
-          <input class="popup__text popup__text_job" id='job-input' name="popup-job" type="text"
+        <label class="modal__input">
+          <input class="modal__text modal__text_job" id='job-input' name="modal-job" type="text"
             placeholder="Введите описание" minlength="2" maxlength="200" autocomplete="off" required />
-          <span class='popup__input-error' id='job-input-error'></span>
+          <span class='modal__input-error' id='job-input-error'></span>
         </label>
-        <button type="submit" name="submit" class="popup__submit-button" aria-label="Сохранить">
+        <button type="submit" name="submit" class="modal__submit-button" aria-label="Сохранить">
           Сохранить
         </button>
       </form>
@@ -60,33 +60,33 @@
   </div>
 
 
-  <!--Popup Place-->
-  <div class="popup popup_place">
-    <div class="popup__container">
-      <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
-      <h3 class="popup__title">Новое место</h3>
-      <form class="popup__form" action="#" name="popup-form" id="popupAddForm" novalidate>
-        <label class="popup__input">
-          <input class="popup__text popup__text_place" id='title-input' type="text" name="title" value=""
+  <!--Modal Place-->
+  <div class="modal modal_place">
+    <div class="modal__container">
+      <button class="modal__close-button" aria-label="Закрыть" type="button"></button>
+      <h3 class="modal__title">Новое место</h3>
+      <form class="modal__form" action="#" name="modal-form" id="modalAddForm" novalidate>
+        <label class="modal__input">
+          <input class="modal__text modal__text_place" id='title-input' type="text" name="title" value=""
             placeholder="Название" minlength="1" maxlength="30" autocomplete="off" required />
-          <span class='popup__input-error' id='title-input-error'></span>
+          <span class='modal__input-error' id='title-input-error'></span>
         </label>
-        <label class="popup__input">
-          <input class="popup__text popup__text_link" id='link-input' type="url" name="link" value=""
+        <label class="modal__input">
+          <input class="modal__text modal__text_link" id='link-input' type="url" name="link" value=""
             placeholder="Ссылка на картинку" autocomplete="off" required />
-          <span class='popup__input-error' id='link-input-error'></span>
+          <span class='modal__input-error' id='link-input-error'></span>
         </label>
-        <button type="submit" name="submit" class="popup__submit-button " aria-label="Создать">Создать</button>
+        <button type="submit" name="submit" class="modal__submit-button " aria-label="Создать">Создать</button>
       </form>
     </div>
   </div>
 
-  <!--Popup Image-->
-  <div class="popup popup_image">
-    <div class="popup__content">
-      <img class="popup__image" src="#" alt="Фото места">
-      <p class="popup__caption"></p>
-      <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
+  <!--Modal Image-->
+  <div class="modal modal_image">
+    <div class="modal__content">
+      <img class="modal__image" src="#" alt="Фото места">
+      <p class="modal__caption"></p>
+      <button class="modal__close-button" aria-label="Закрыть" type="button"></button>
     </div>
   </div>
 

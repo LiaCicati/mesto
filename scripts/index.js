@@ -1,29 +1,37 @@
+// General Data
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
+
+// Modal Edit Profile
+const modalEdit = document.querySelector('.modal_edit');
+const openmodalEdit = profile.querySelector('.profile__edit-button');
+const closeModalEdit = document.querySelector('.modal__close-button');
+const modalEditSave = document.querySelector('.modal__submit-button');
+const formElementEdit = modalEdit.querySelector('.modal__form');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
-const popup = document.querySelector('.popup');
-const form = popup.querySelector('.popup__form');
-const openPopupEdit = profile.querySelector('.profile__edit-button');
-const popupEditSave = document.querySelector('.popup__submit-button');
-const closePopupEdit = document.querySelector('.popup__close-button');
-const popupEdit = document.querySelector('.popup_edit');
-const formElementEdit = popupEdit.querySelector('.popup__form');
-const nameInput = formElementEdit.querySelector('.popup__text_name');
-const jobInput = formElementEdit.querySelector('.popup__text_job');
-const openPopupAdd = document.querySelector('.profile__add-button');
-const popupAdd = document.querySelector('.popup_place');
-const formElementAdd = popupAdd.querySelector('.popup__form');
-const closePopupAdd = popupAdd.querySelector('.popup__close-button');
-const popupAddSave = popupAdd.querySelector('.popup__submit-button');
-const inputTitle = popupAdd.querySelector('.popup__text_place');
-const inputLink = popupAdd.querySelector('.popup__text_link');
+const nameInput = formElementEdit.querySelector('.modal__text_name');
+const jobInput = formElementEdit.querySelector('.modal__text_job');
+
+// Modal Add Card 
+const modalAdd = document.querySelector('.modal_place');
+const openModalAdd = document.querySelector('.profile__add-button');
+const closeModalAdd = modalAdd.querySelector('.modal__close-button');
+const modalAddSave = modalAdd.querySelector('.modal__submit-button');
+const formElementAdd = modalAdd.querySelector('.modal__form');
+const inputTitle = modalAdd.querySelector('.modal__text_place');
+const inputLink = modalAdd.querySelector('.modal__text_link');
+
+// Modal Image
+const modalImage = document.querySelector('.modal_image');
+const closeModalImage = modalImage.querySelector('.modal__close-button');
+
+// Template Document
 const elementsTemplate = document.querySelector('#elements-template').content;
 const elementsList = content.querySelector('.elements__list');
-const deleteButton = document.querySelector('.element__delete-button');
-const popupImage = document.querySelector('.popup_image');
-const closePopupImage = popupImage.querySelector('.popup__close-button');
 
+
+// Array of Initial Cards
 const initialCards = [{
         name: 'Хиби́ны',
         link: 'https://images.unsplash.com/photo-1518675013095-1cef34ac232e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80'
@@ -56,8 +64,9 @@ const initialCards = [{
     }
 ];
 
-function toggleModal(popup) {
-    const isOpen = popup.classList.contains('popup_opened');
+// Togle Modal Window
+function toggleModal(modal) {
+    const isOpen = modal.classList.contains('modal_opened');
     if (isOpen) {
         document.removeEventListener('keydown', closeOnEsc)
         document.removeEventListener('click', closeByOverlay);
@@ -65,62 +74,66 @@ function toggleModal(popup) {
         document.addEventListener('keydown', closeOnEsc)
         document.addEventListener('click', closeByOverlay);
     }
-    popup.classList.toggle('popup_opened');
+    modal.classList.toggle('modal_opened');
 }
 
-
-function toggleProfileModal(popupEdit) {
-    toggleModal(popup);
-    if (popupEdit.classList.contains('popup_opened')) {
+// Toggle Profile Modal
+function toggleProfileModal(modalEdit) {
+    toggleModal(modalEdit);
+    if (modalEdit.classList.contains('modal_opened')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
     }
 
-    popupEditSave.classList.remove('popup__submit-button_disabled');
-    popupEditSave.removeAttribute('disabled');
-    hideInputError(popupEdit, nameInput, object);
-    hideInputError(popupEdit, jobInput, object);
+    modalEditSave.classList.remove('modal__submit-button_disabled');
+    modalEditSave.removeAttribute('disabled');
+    hideInputError(modalEdit, nameInput, object);
+    hideInputError(modalEdit, jobInput, object);
 
 };
 
-function toggleAddModal(popupAdd) {
+// Toggle Add Card Modal
+function toggleAddModal(modalAdd) {
 
-    hideInputError(popupAdd, inputLink, object);
-    hideInputError(popupAdd, inputTitle, object);
-    document.getElementById('popupAddForm').reset();
+    hideInputError(modalAdd, inputLink, object);
+    hideInputError(modalAdd, inputTitle, object);
+    document.getElementById('modalAddForm').reset();
 
-    toggleModal(popupAdd);
+    toggleModal(modalAdd);
 }
 
+// Close Modal by Overlay & on Esc
 function closeByOverlay(evt) {
-    if (evt.target.classList.contains('popup')) {
-        toggleModal(document.querySelector('.popup_opened'));
+    if (evt.target.classList.contains('modal')) {
+        toggleModal(document.querySelector('.modal_opened'));
     }
 };
 
 function closeOnEsc(evt) {
     if (evt.key === 'Escape') {
-        toggleModal(document.querySelector('.popup_opened'));
+        toggleModal(document.querySelector('.modal_opened'));
     }
 };
 
-
+// Submit Profile Data
 function formSubmitHandler(evt) {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    toggleProfileModal(popupEdit);
+    toggleProfileModal(modalEdit);
 };
 
-function showImagePopup(evt) {
+// Open Modal Image
+function showImageModal(evt) {
     const clickedImage = evt.target;
-    toggleModal(popupImage);
-    popupImage.querySelector('.popup__image').src = clickedImage.src;
-    popupImage.querySelector('.popup__caption').textContent = clickedImage.parentElement.querySelector('.element__title').textContent;
+    toggleModal(modalImage);
+    modalImage.querySelector('.modal__image').src = clickedImage.src;
+    modalImage.querySelector('.modal__caption').textContent = clickedImage.parentElement.querySelector('.element__title').textContent;
 };
 
+// Initial Cards & New Cards
 function addCard(initialCards) {
     const card = elementsTemplate.cloneNode(true);
     const cardImage = card.querySelector('.element__image');
@@ -128,7 +141,7 @@ function addCard(initialCards) {
     cardImage.src = initialCards.link;
     card.querySelector('.element__title').textContent = initialCards.name;
 
-    card.querySelector('.element__image').addEventListener('click', showImagePopup);
+    card.querySelector('.element__image').addEventListener('click', showImageModal);
     card.querySelector('.element__like-button').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__like-button_active');
     });
@@ -136,8 +149,8 @@ function addCard(initialCards) {
         evt.target.closest('.element').remove();
     });
 
-    popupAddSave.classList.add('popup__submit-button_disabled');
-    popupAddSave.setAttribute('disabled', true);
+    modalAddSave.classList.add('modal__submit-button_disabled');
+    modalAddSave.setAttribute('disabled', true);
 
     return card;
 };
@@ -151,7 +164,7 @@ initialCards.forEach(card => {
     elementsList.append(addCard(card))
 });
 
-
+// Submit Card Data
 function formSubmitHandlerCard(evt) {
     evt.preventDefault();
     const newPlace = {
@@ -159,16 +172,16 @@ function formSubmitHandlerCard(evt) {
         link: inputLink.value,
     };
     renderNewCard(newPlace);
-    toggleAddModal(popupAdd);
-    document.getElementById('popupAddForm').reset();
+    toggleAddModal(modalAdd);
+    document.getElementById('modalAddForm').reset();
 };
 
+// Event Listeners
+openmodalEdit.addEventListener('click', () => toggleProfileModal(modalEdit));
+openModalAdd.addEventListener('click', () => toggleAddModal(modalAdd));
+closeModalEdit.addEventListener('click', () => toggleProfileModal(modalEdit));
+closeModalAdd.addEventListener('click', () => toggleAddModal(modalAdd));
+closeModalImage.addEventListener('click', () => toggleModal(modalImage));
 
-openPopupEdit.addEventListener('click', () => toggleProfileModal(popupEdit));
-openPopupAdd.addEventListener('click', () => toggleAddModal(popupAdd));
-closePopupEdit.addEventListener('click', () => toggleProfileModal(popupEdit));
-closePopupAdd.addEventListener('click', () => toggleAddModal(popupAdd));
-closePopupImage.addEventListener('click', () => toggleModal(popupImage));
-
-popupEdit.addEventListener('submit', formSubmitHandler);
-popupAdd.addEventListener('submit', formSubmitHandlerCard);
+modalEdit.addEventListener('submit', formSubmitHandler);
+modalAdd.addEventListener('submit', formSubmitHandlerCard);
