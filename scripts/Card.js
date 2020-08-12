@@ -25,10 +25,10 @@ generateCard() {
   this._setEventListeners();
 
   const cardImage = this._element.querySelector('.element__image');
-  const cardPlace = this._element.querySelector('.element__title');
+  const cardTitle = this._element.querySelector('.element__title');
 
   cardImage.src = this._link;
-  cardPlace.textContent = this._name;
+  cardTitle.textContent = this._name;
 
   return this._element;
 }
