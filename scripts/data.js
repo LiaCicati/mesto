@@ -30,3 +30,13 @@ export const initialCards = [{
 
 }
 ];
+
+
+export const object = {
+    formSelector: '.modal__form',
+    inputSelector: '.modal__text',
+    submitButtonSelector: '.modal__submit-button',
+    inactiveButtonClass: 'modal__submit-button_disabled',
+    inputErrorClass: 'modal__text_type_error',
+    errorClass: 'modal__input-error_active'
+}

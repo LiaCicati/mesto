@@ -1,5 +1,6 @@
 import Card from "./Card.js";
-import {initialCards} from './initialCards.js';
+import {initialCards, object} from './data.js';
+import FormValidator from './FormValidator.js';
 
 // General Data
 const content = document.querySelector('.content');
@@ -53,22 +54,36 @@ function toggleProfileModal(modalEdit) {
         jobInput.value = profileJob.textContent;
     }
 
-    modalEditSave.classList.remove('modal__submit-button_disabled');
-    modalEditSave.removeAttribute('disabled');
-    hideInputError(modalEdit, nameInput, object);
-    hideInputError(modalEdit, jobInput, object);
-
+    const modalProfileFormValidator = new FormValidator(object, modalEdit);
+    modalProfileFormValidator.enableValidation();
+    hideInputErrors(modalEdit);
 };
 
 // Toggle Add Card Modal
 function toggleAddModal(modalAdd) {
-
-    hideInputError(modalAdd, inputLink, object);
-    hideInputError(modalAdd, inputTitle, object);
-    document.getElementById('modalAddForm').reset();
+    const modalCardFormValidator = new FormValidator(object, modalAdd);
+    modalCardFormValidator.enableValidation();
+    
+    hideInputErrors(modalAdd);
+    formElementAdd.reset();
 
     toggleModal(modalAdd);
 }
+
+// Delete Errors when Open Modal
+function hideInputErrors (form) { 
+    const inputElements = Array.from(form.querySelectorAll('.modal__text'));
+    const errorElement = Array.from(form.querySelectorAll('.modal__input-error'));
+
+    inputElements.forEach(input => { 
+      input.classList.remove('modal__text_type_error');
+    });
+    
+    errorElement.forEach(error => { 
+      error.classList.remove('modal__input-error_active');
+      error.textContent = '';
+    });
+  };
 
 // Close Modal by Overlay & on Esc
 function closeByOverlay(evt) {
@@ -99,6 +114,7 @@ function formSubmitHandler(evt) {
 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
+    
     toggleProfileModal(modalEdit);
 };
 
@@ -106,6 +122,7 @@ function formSubmitHandler(evt) {
 function addCard (card) {
     elementsList.prepend(card);
   }
+
 // Submit Card Data
 function formSubmitHandlerCard (evt) {
     evt.preventDefault();
