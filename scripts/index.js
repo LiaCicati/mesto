@@ -1,10 +1,6 @@
-// import Card from "./Card.js";
-// import {initialCards, object} from './data.js';
-// import FormValidator from './FormValidator.js';
-
-import {Card} from './Card.js';
-import {initialCards, object} from './data.js'
-import {FormValidator} from './FormValidator.js';
+import Card from "./Card.js";
+import {initialCards, object} from './data.js';
+import FormValidator from './FormValidator.js';
 
 // General Data
 const content = document.querySelector('.content');

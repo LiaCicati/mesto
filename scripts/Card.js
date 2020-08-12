@@ -4,11 +4,13 @@ const modalImage = document.querySelector(".modal_image");
 const modalImageFull = modalImage.querySelector(".modal__image");
 const modalImageCaption = modalImage.querySelector(".modal__caption");
 
-export class Card {
+export default class Card {
   constructor(name, link, cardSelector) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._deleteCard = this._deleteCard.bind(this);
+    this._toggleLikeButton = this._toggleLikeButton.bind(this);
   }
 
   _getTemplate() {
@@ -19,30 +21,28 @@ export class Card {
     return cardElement;
   }
 
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
 
-generateCard() {
-  this._element = this._getTemplate();
-  this._setEventListeners();
+    const cardImage = this._element.querySelector(".element__image");
+    const cardTitle = this._element.querySelector(".element__title");
 
-  const cardImage = this._element.querySelector('.element__image');
-  const cardTitle = this._element.querySelector('.element__title');
+    cardImage.src = this._link;
+    cardTitle.textContent = this._name;
 
-  cardImage.src = this._link;
-  cardTitle.textContent = this._name;
-
-  return this._element;
-}
-
+    return this._element;
+  }
 
   _deleteCard() {
     this._element.remove();
-  };
+  }
 
-  _toggleLikeButton(){
+  _toggleLikeButton() {
     this._element
       .querySelector(".element__like-button")
       .classList.toggle("element__like-button_active");
-  };
+  }
 
   _showImage() {
     modalImageFull.src = this._link;
@@ -67,4 +67,3 @@ generateCard() {
       .addEventListener("click", this._toggleLikeButton);
   }
 }
-
