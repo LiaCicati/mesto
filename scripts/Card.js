@@ -4,7 +4,7 @@ const modalImage = document.querySelector(".modal_image");
 const modalImageFull = modalImage.querySelector(".modal__image");
 const modalImageCaption = modalImage.querySelector(".modal__caption");
 
-export default class Card {
+export class Card {
   constructor(name, link, cardSelector) {
     this._name = name;
     this._link = link;
