@@ -34,11 +34,11 @@ generateCard() {
 }
 
 
-  _deleteCard = () => {
+  _deleteCard() {
     this._element.remove();
   };
 
-  _toggleLikeButton = () => {
+  _toggleLikeButton(){
     this._element
       .querySelector(".element__like-button")
       .classList.toggle("element__like-button_active");
