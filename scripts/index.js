@@ -104,7 +104,7 @@ initialCards.forEach((item) => {
     const card = new Card(item.name, item.link, '#elements-template');
     const cardElement = card.generateCard();
   
-     document.querySelector('.elements__list').append(cardElement);
+     elementsList.append(cardElement);
   });
 
 
