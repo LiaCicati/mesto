@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import {initialCards} from './initialCards.js';
+
 // General Data
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
@@ -26,43 +29,8 @@ const inputLink = modalAdd.querySelector('.modal__text_link');
 const modalImage = document.querySelector('.modal_image');
 const closeModalImage = modalImage.querySelector('.modal__close-button');
 
-// Template Document
-const elementsTemplate = document.querySelector('#elements-template').content;
+// List of Cards
 const elementsList = content.querySelector('.elements__list');
-
-
-// Array of Initial Cards
-const initialCards = [{
-        name: 'Хиби́ны',
-        link: 'https://images.unsplash.com/photo-1518675013095-1cef34ac232e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80'
-
-    },
-    {
-        name: 'Башкирия',
-        link: 'https://images.unsplash.com/photo-1482355383105-63c565658bab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2214&q=80'
-
-    },
-    {
-        name: 'Ольхо́н',
-        link: 'https://images.unsplash.com/photo-1490879112094-281fea0883dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
-
-    },
-    {
-        name: 'Магадан',
-        link: 'https://images.unsplash.com/photo-1570340831042-040b3999690c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80'
-
-    },
-    {
-        name: 'Озеро Байкал',
-        link: 'https://images.unsplash.com/photo-1551844931-9c422b3f8a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=935&q=80'
-
-    },
-    {
-        name: 'Алтай',
-        link: 'https://images.unsplash.com/photo-1494791286225-ea86fc957ba7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3294&q=80'
-
-    }
-];
 
 // Togle Modal Window
 function toggleModal(modal) {
@@ -115,66 +83,39 @@ function closeOnEsc(evt) {
     }
 };
 
+
+// Add Array of Initial Cards 
+initialCards.forEach((item) => {
+    const card = new Card(item.name, item.link, '#elements-template');
+    const cardElement = card.generateCard();
+  
+     document.querySelector('.elements__list').append(cardElement);
+  });
+
+
 // Submit Profile Data
 function formSubmitHandler(evt) {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-
     toggleProfileModal(modalEdit);
 };
 
-// Open Modal Image
-function showImageModal(evt) {
-    const clickedImage = evt.target;
-    toggleModal(modalImage);
-    modalImage.querySelector('.modal__image').src = clickedImage.src;
-    modalImage.querySelector('.modal__caption').textContent = clickedImage.parentElement.querySelector('.element__title').textContent;
-};
-
-// Initial Cards & New Cards
-function addCard(initialCards) {
-    const card = elementsTemplate.cloneNode(true);
-    const cardImage = card.querySelector('.element__image');
-
-    cardImage.src = initialCards.link;
-    card.querySelector('.element__title').textContent = initialCards.name;
-
-    card.querySelector('.element__image').addEventListener('click', showImageModal);
-    card.querySelector('.element__like-button').addEventListener('click', (evt) => {
-        evt.target.classList.toggle('element__like-button_active');
-    });
-    card.querySelector('.element__delete-button').addEventListener('click', (evt) => {
-        evt.target.closest('.element').remove();
-    });
-
-    modalAddSave.classList.add('modal__submit-button_disabled');
-    modalAddSave.setAttribute('disabled', true);
-
-    return card;
-};
-
-function renderNewCard(card) {
-    const newCard = addCard(card);
-    elementsList.prepend(newCard);
-};
-
-initialCards.forEach(card => {
-    elementsList.append(addCard(card))
-});
-
+// Add New Card
+function addCard (card) {
+    elementsList.prepend(card);
+  }
 // Submit Card Data
-function formSubmitHandlerCard(evt) {
+function formSubmitHandlerCard (evt) {
     evt.preventDefault();
-    const newPlace = {
-        name: inputTitle.value,
-        link: inputLink.value,
-    };
-    renderNewCard(newPlace);
+  
+    const card = new Card(inputTitle.value, inputLink.value, '#elements-template');
+    const cardElement = card.generateCard();
+    addCard(cardElement);
+  
     toggleAddModal(modalAdd);
-    document.getElementById('modalAddForm').reset();
-};
+  }
 
 // Event Listeners
 openmodalEdit.addEventListener('click', () => toggleProfileModal(modalEdit));
@@ -185,3 +126,5 @@ closeModalImage.addEventListener('click', () => toggleModal(modalImage));
 
 modalEdit.addEventListener('submit', formSubmitHandler);
 modalAdd.addEventListener('submit', formSubmitHandlerCard);
+
+export {toggleModal};
