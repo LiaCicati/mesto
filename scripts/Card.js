@@ -1,4 +1,4 @@
-import {toggleModal}  from './Utils.js';
+import { toggleModal } from "./Utils.js";
 
 // Modal Image
 const modalImage = document.querySelector(".modal_image");
@@ -50,7 +50,7 @@ export default class Card {
   _showImage() {
     modalImageFull.src = this._link;
     modalImageCaption.textContent = this._name;
-    modalImageFull.alt= this._name;
+    modalImageFull.alt = this._name;
     toggleModal(modalImage);
   }
 

@@ -56,14 +56,6 @@ function toggleAddModal(modalAdd) {
     modalAddSave.setAttribute('disabled', true);
 }
 
-  // Enable Validation
-  const modalProfileFormValidator = new FormValidator(validationParams, modalEdit);
-  modalProfileFormValidator.enableValidation();
-
-  const modalCardFormValidator = new FormValidator(validationParams, modalAdd);
-  modalCardFormValidator.enableValidation();
-
-
 // Add Array of Initial Cards 
 initialCards.forEach((item) => {
     const card = new Card(item.name, item.link, '#elements-template');
@@ -73,6 +65,14 @@ initialCards.forEach((item) => {
   });
 
 
+  // Enable Validation
+  const modalProfileFormValidator = new FormValidator(validationParams, modalEdit);
+  modalProfileFormValidator.enableValidation();
+
+  const modalCardFormValidator = new FormValidator(validationParams, modalAdd);
+  modalCardFormValidator.enableValidation();
+
+  
 // Submit Profile Data
 function formSubmitHandler(evt) {
     evt.preventDefault();
