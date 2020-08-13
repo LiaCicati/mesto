@@ -51,6 +51,7 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
+    
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
 
     this._toggleButtonState(inputList);
@@ -64,7 +65,23 @@ export default class FormValidator {
     });
   }
 
+  hideAllErrors () {
+    const inputElements = Array.from(this._formElement.querySelectorAll('.modal__text'));
+  const errorElement = Array.from(this._formElement.querySelectorAll('.modal__input-error'));
+
+  inputElements.forEach(input => { 
+    input.classList.remove(this._inputErrorClass);
+  });
+  
+  errorElement.forEach(error => { 
+    error.classList.remove(this._errorClass);
+    error.textContent = '';
+  });
+}
+
   enableValidation() {
     this._setEventListeners();
   }
 }
+
+

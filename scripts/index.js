@@ -1,7 +1,7 @@
 import Card from "./Card.js";
-import {initialCards, object} from './data.js';
-import FormValidator from './FormValidator.js';
-
+import {initialCards, validationParams} from './data.js';
+import FormValidator  from './FormValidator.js';
+import {toggleModal}  from './Utils.js';
 // General Data
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
@@ -33,19 +33,6 @@ const closeModalImage = modalImage.querySelector('.modal__close-button');
 // List of Cards
 const elementsList = content.querySelector('.elements__list');
 
-// Togle Modal Window
-function toggleModal(modal) {
-    const isOpen = modal.classList.contains('modal_opened');
-    if (isOpen) {
-        document.removeEventListener('keydown', closeOnEsc)
-        document.removeEventListener('click', closeByOverlay);
-    } else {
-        document.addEventListener('keydown', closeOnEsc)
-        document.addEventListener('click', closeByOverlay);
-    }
-    modal.classList.toggle('modal_opened');
-}
-
 // Toggle Profile Modal
 function toggleProfileModal(modalEdit) {
     toggleModal(modalEdit);
@@ -54,49 +41,27 @@ function toggleProfileModal(modalEdit) {
         jobInput.value = profileJob.textContent;
     }
 
-    const modalProfileFormValidator = new FormValidator(object, modalEdit);
-    modalProfileFormValidator.enableValidation();
-    hideInputErrors(modalEdit);
-};
+    modalProfileFormValidator.hideAllErrors();
+    modalEditSave.classList.remove('modal__submit-button_disabled');
+    modalEditSave.removeAttribute('disabled');
+}
 
 // Toggle Add Card Modal
 function toggleAddModal(modalAdd) {
-    const modalCardFormValidator = new FormValidator(object, modalAdd);
-    modalCardFormValidator.enableValidation();
-    
-    hideInputErrors(modalAdd);
-    formElementAdd.reset();
-
     toggleModal(modalAdd);
+
+    formElementAdd.reset();
+    modalCardFormValidator.hideAllErrors();
+    modalAddSave.classList.add('modal__submit-button_disabled');
+    modalAddSave.setAttribute('disabled', true);
 }
 
-// Delete Errors when Open Modal
-function hideInputErrors (form) { 
-    const inputElements = Array.from(form.querySelectorAll('.modal__text'));
-    const errorElement = Array.from(form.querySelectorAll('.modal__input-error'));
+  // Enable Validation
+  const modalProfileFormValidator = new FormValidator(validationParams, modalEdit);
+  modalProfileFormValidator.enableValidation();
 
-    inputElements.forEach(input => { 
-      input.classList.remove('modal__text_type_error');
-    });
-    
-    errorElement.forEach(error => { 
-      error.classList.remove('modal__input-error_active');
-      error.textContent = '';
-    });
-  };
-
-// Close Modal by Overlay & on Esc
-function closeByOverlay(evt) {
-    if (evt.target.classList.contains('modal')) {
-        toggleModal(document.querySelector('.modal_opened'));
-    }
-};
-
-function closeOnEsc(evt) {
-    if (evt.key === 'Escape') {
-        toggleModal(document.querySelector('.modal_opened'));
-    }
-};
+  const modalCardFormValidator = new FormValidator(validationParams, modalAdd);
+  modalCardFormValidator.enableValidation();
 
 
 // Add Array of Initial Cards 
@@ -116,7 +81,7 @@ function formSubmitHandler(evt) {
     profileJob.textContent = jobInput.value;
     
     toggleProfileModal(modalEdit);
-};
+}
 
 // Add New Card
 function addCard (card) {
@@ -143,5 +108,3 @@ closeModalImage.addEventListener('click', () => toggleModal(modalImage));
 
 modalEdit.addEventListener('submit', formSubmitHandler);
 modalAdd.addEventListener('submit', formSubmitHandlerCard);
-
-export {toggleModal};

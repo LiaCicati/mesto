@@ -32,7 +32,7 @@ export const initialCards = [{
 ];
 
 
-export const object = {
+export const validationParams = {
     formSelector: '.modal__form',
     inputSelector: '.modal__text',
     submitButtonSelector: '.modal__submit-button',
