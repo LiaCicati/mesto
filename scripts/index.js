@@ -10,6 +10,7 @@ import FormValidator from './FormValidator.js';
 import {
     toggleModal
 } from './utils.js';
+
 // General Data
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
