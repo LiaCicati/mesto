@@ -1,4 +1,6 @@
-export { toggleModal };
+export {
+  toggleModal
+};
 
 // Togle Any Modal Window
 function toggleModal(modal) {

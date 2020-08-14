@@ -1,7 +1,15 @@
 import Card from "./Card.js";
-import {initialCards, validationParams} from './data.js';
-import FormValidator  from './FormValidator.js';
-import {toggleModal}  from './Utils.js';
+
+import {
+    initialCards,
+    validationParams
+} from './data.js';
+
+import FormValidator from './FormValidator.js';
+
+import {
+    toggleModal
+} from './utils.js';
 // General Data
 const content = document.querySelector('.content');
 const profile = content.querySelector('.profile');
@@ -42,8 +50,8 @@ function toggleProfileModal(modalEdit) {
     }
 
     modalProfileFormValidator.hideAllErrors();
-    modalEditSave.classList.remove('modal__submit-button_disabled');
-    modalEditSave.removeAttribute('disabled');
+    modalProfileFormValidator. addButtonActive(modalEditSave);
+
 }
 
 // Toggle Add Card Modal
@@ -52,52 +60,51 @@ function toggleAddModal(modalAdd) {
 
     formElementAdd.reset();
     modalCardFormValidator.hideAllErrors();
-    modalAddSave.classList.add('modal__submit-button_disabled');
-    modalAddSave.setAttribute('disabled', true);
+    modalCardFormValidator.removeButtonActive(modalAddSave);
 }
 
 // Add Array of Initial Cards 
 initialCards.forEach((item) => {
     const card = new Card(item.name, item.link, '#elements-template');
     const cardElement = card.generateCard();
-  
-     elementsList.append(cardElement);
-  });
+
+    elementsList.append(cardElement);
+});
 
 
-  // Enable Validation
-  const modalProfileFormValidator = new FormValidator(validationParams, modalEdit);
-  modalProfileFormValidator.enableValidation();
+// Enable Validation
+const modalProfileFormValidator = new FormValidator(validationParams, modalEdit);
+modalProfileFormValidator.enableValidation();
 
-  const modalCardFormValidator = new FormValidator(validationParams, modalAdd);
-  modalCardFormValidator.enableValidation();
+const modalCardFormValidator = new FormValidator(validationParams, modalAdd);
+modalCardFormValidator.enableValidation();
 
-  
+
 // Submit Profile Data
 function formSubmitHandler(evt) {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    
+
     toggleProfileModal(modalEdit);
 }
 
 // Add New Card
-function addCard (card) {
+function addCard(card) {
     elementsList.prepend(card);
-  }
+}
 
 // Submit Card Data
-function formSubmitHandlerCard (evt) {
+function formSubmitHandlerCard(evt) {
     evt.preventDefault();
-  
+
     const card = new Card(inputTitle.value, inputLink.value, '#elements-template');
     const cardElement = card.generateCard();
     addCard(cardElement);
-  
+
     toggleAddModal(modalAdd);
-  }
+}
 
 // Event Listeners
 openmodalEdit.addEventListener('click', () => toggleProfileModal(modalEdit));
