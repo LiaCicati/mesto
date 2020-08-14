@@ -9,7 +9,7 @@ import FormValidator from './FormValidator.js';
 
 import {
     toggleModal
-} from './utilities.js';
+} from './utils.js';
 
 // General Data
 const content = document.querySelector('.content');

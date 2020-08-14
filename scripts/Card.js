@@ -1,6 +1,6 @@
 import {
   toggleModal
-} from "./utilities.js";
+} from "./utils.js";
 
 // Modal Image
 const modalImage = document.querySelector(".modal_image");
