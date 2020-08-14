@@ -50,7 +50,7 @@ function toggleProfileModal(modalEdit) {
     }
 
     modalProfileFormValidator.hideAllErrors();
-    modalProfileFormValidator. addButtonActive(modalEditSave);
+    modalProfileFormValidator.addButtonActive(modalEditSave);
 
 }
 

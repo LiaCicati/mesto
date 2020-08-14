@@ -47,10 +47,10 @@ export default class FormValidator {
     if (this._hasInvalidInput(inputList)) {
 
       this.removeButtonActive(buttonElement, this._inactiveButtonClass);
-      
+
     } else {
 
-      this. addButtonActive(buttonElement, this._inactiveButtonClass);
+      this.addButtonActive(buttonElement, this._inactiveButtonClass);
 
     }
   }
