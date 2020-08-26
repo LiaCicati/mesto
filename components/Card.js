@@ -1,17 +1,9 @@
-import {
-  toggleModal
-} from "./utils.js";
-
-// Modal Image
-const modalImage = document.querySelector(".modal_image");
-const modalImageFull = modalImage.querySelector(".modal__image");
-const modalImageCaption = modalImage.querySelector(".modal__caption");
-
 export default class Card {
-  constructor(name, link, cardSelector) {
+  constructor(name, link, cardSelector, handlerCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handlerCardClick = handlerCardClick;
     this._deleteCard = this._deleteCard.bind(this);
     this._toggleLikeButton = this._toggleLikeButton.bind(this);
   }
@@ -26,14 +18,13 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._cardName = this._element.querySelector('.element__title');
+    this._cardImage = this._element.querySelector('.element__image');
     this._setEventListeners();
 
-    const cardImage = this._element.querySelector(".element__image");
-    const cardTitle = this._element.querySelector(".element__title");
-
-    cardImage.src = this._link;
-    cardTitle.textContent = this._name;
-    cardImage.alt = this._name;
+    this._cardName.textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
 
     return this._element;
   }
@@ -48,21 +39,7 @@ export default class Card {
       .classList.toggle("element__like-button_active");
   }
 
-  _showImage() {
-    modalImageFull.src = this._link;
-    modalImageCaption.textContent = this._name;
-    modalImageFull.alt = this._name;
-    toggleModal(modalImage);
-  }
-
   _setEventListeners() {
-    this._element
-      .querySelector(".element__image")
-      .addEventListener("click", (evt) => {
-        evt.preventDefault();
-        this._showImage();
-      });
-
     this._element
       .querySelector(".element__delete-button")
       .addEventListener("click", this._deleteCard);
@@ -70,5 +47,9 @@ export default class Card {
     this._element
       .querySelector(".element__like-button")
       .addEventListener("click", this._toggleLikeButton);
+
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      this._handlerCardClick(this._name, this._link);
+    });
   }
 }
