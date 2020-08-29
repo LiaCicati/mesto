@@ -23,21 +23,21 @@ export default class Modal {
 
     open() {
         this._modalSelector.classList.add('modal_opened');
+        document.addEventListener('keydown', this._handlerEscClose.bind(this));
     }
 
     close() {
         this._modalSelector.classList.remove('modal_opened');
+        document.removeEventListener('keydown', this._handlerEscClose.bind(this));
     }
 
     setEventListeners() {
-        document.addEventListener('keydown', this._handlerEscClose.bind(this));
         this._modalSelector.addEventListener('click', this._closeByOverlay.bind(this));
         this._closeButton.addEventListener('click', this._handlerCloseButton.bind(this));
 
     }
 
     removeEventListeners() {
-        document.removeEventListener('keydown', this._handlerEscClose.bind(this));
         this._modalSelector.removeEventListener('click', this._closeByOverlay.bind(this));
     }
 }
