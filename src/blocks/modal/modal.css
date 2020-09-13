@@ -12,6 +12,7 @@
 @import url('./__input-error/modal__input-error.css');
 @import url('./__input-error/_active/modal__input-error_active.css');
 @import url('./__text/_type/modal__text_type_error.css');
+@import url('./__delete-form/modal__delete-form.css');
 
 
 .modal {

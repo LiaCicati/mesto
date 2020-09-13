@@ -3,53 +3,52 @@ const path = require('path'); // подключаем path к конфигу в�
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
-    entry: { main: './src/pages/index.js' },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js'
-    },
-    module: {
-        rules: [
-          {
-            test: /\.js$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/
-          },
-          {
-            test: /\.css$/,
-            loader: [
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1
-                }
-              },
-              'postcss-loader'
-            ],
-          },
-          {
-            test: /\.(png|svg|jpg|gif)$/,
-            loader: 'file-loader?name=./images/[name].[ext]'
-          },
-          {
-            test: /.(eot|ttf|woff|woff2)$/,
-            loader: 'file-loader?name=./fonts/[name].[ext]'
-          },
-          {
-            test: /\.html$/,
-            loader: 'html-loader',
-          }
-        ]
+  entry: {
+    main: './src/pages/index.js'
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js'
+  },
+  module: {
+    rules: [{
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
-      plugins: [
-        // настроили плагин
-        new HtmlWebpackPlugin({
-          template: './src/index.html'
-        }),
-        new MiniCssExtractPlugin()
-      ]
-    };
+      {
+        test: /\.css$/,
+        loader: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        loader: 'file-loader?name=./images/[name].[ext]'
+      },
+      {
+        test: /.(eot|ttf|woff|woff2)$/,
+        loader: 'file-loader?name=./fonts/[name].[ext]'
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+      }
+    ]
+  },
+  plugins: [
+    // настроили плагин
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
+    new MiniCssExtractPlugin()
+  ]
+};
 
-
-// переписали точку выхода, используя утилиту path

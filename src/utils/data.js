@@ -24,42 +24,22 @@ export const closeModalImage = modalImage.querySelector('.modal__close-button');
 export const modalImageFull = modalImage.querySelector(".modal__image");
 export const modalImageCaption = modalImage.querySelector(".modal__caption");
 
+export const modalDelete = document.querySelector('.modal_delete');
+export const modalDeleteButton = modalDelete.querySelector('.modal__submit-button');
+// export const profileAvatar = document.querySelector('.profile__avatar');
+
 // List of Cards
 export const elementsList = document.querySelector('.elements__list');
+export const templateId = document.querySelector('#elements-template');
+// export const modalDelete = document.querySelector('.modal_delete')
+export const profileAvatar = document.querySelector('.profile__avatar');
+export const modalAvatar = document.querySelector('.modal_avatar');
+export const profileAvatarButton = document.querySelector('.profile__avatar-edit');
+export const avatarSubmit = modalAvatar.querySelector(".modal__submit-button");
 
 
 // Array of Initial Cards
-export const initialCards = [{
-        name: 'Хиби́ны',
-        link: 'https://images.unsplash.com/photo-1518675013095-1cef34ac232e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80'
-
-    },
-    {
-        name: 'Башкирия',
-        link: 'https://images.unsplash.com/photo-1482355383105-63c565658bab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2214&q=80'
-
-    },
-    {
-        name: 'Ольхо́н',
-        link: 'https://images.unsplash.com/photo-1490879112094-281fea0883dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
-
-    },
-    {
-        name: 'Магадан',
-        link: 'https://images.unsplash.com/photo-1570340831042-040b3999690c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80'
-
-    },
-    {
-        name: 'Озеро Байкал',
-        link: 'https://images.unsplash.com/photo-1551844931-9c422b3f8a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=935&q=80'
-
-    },
-    {
-        name: 'Алтай',
-        link: 'https://images.unsplash.com/photo-1494791286225-ea86fc957ba7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3294&q=80'
-
-    }
-];
+export const initialCards = [];
 
 
 // Validation
