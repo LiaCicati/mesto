@@ -30,12 +30,4 @@ export default class ModalWithForm extends Modal {
         super.close();
         this._form.reset();
     }
-
-    loading(loading) {
-        if (loading) {
-            this._modal.querySelector('.modal__submit-button').textContent = 'Сохранение...';
-        } else {
-            this._modal.querySelector('.modal__submit-button').textContent = 'Сохранить';
-        }
-    }
 }

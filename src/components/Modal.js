@@ -21,6 +21,14 @@ export default class Modal {
         this.close()
     }
 
+    
+    loading(loading) {
+        if (loading) {
+            this._modal.querySelector('.modal__submit-button').textContent = 'Сохранение...';
+        } else {
+            this._modal.querySelector('.modal__submit-button').textContent = 'Сохранить';
+        }
+    }
 
     open() {
         this._modal.classList.add('modal_opened');

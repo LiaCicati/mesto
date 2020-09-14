@@ -1,17 +1,21 @@
+// User Profile
+export const profileAvatar = document.querySelector('.profile__avatar');
+export const profileName = document.querySelector('.profile__name');
+export const profileJob = document.querySelector('.profile__job');
+export const openmodalEdit = document.querySelector('.profile__edit-button');
+export const openModalAdd = document.querySelector('.profile__add-button');
+export const profileAvatarButton = document.querySelector('.profile__avatar-edit');
+
 // Modal Edit Profile
 export const modalEdit = document.querySelector('.modal_edit');
-export const openmodalEdit = document.querySelector('.profile__edit-button');
 export const closeModalEdit = document.querySelector('.modal__close-button');
 export const modalEditSave = document.querySelector('.modal__submit-button');
 export const formElementEdit = modalEdit.querySelector('.modal__form');
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
 export const nameInput = formElementEdit.querySelector('.modal__text_name');
 export const jobInput = formElementEdit.querySelector('.modal__text_job');
 
 // Modal Add Card 
 export const modalAdd = document.querySelector('.modal_place');
-export const openModalAdd = document.querySelector('.profile__add-button');
 export const closeModalAdd = modalAdd.querySelector('.modal__close-button');
 export const modalAddSave = modalAdd.querySelector('.modal__submit-button');
 export const formElementAdd = modalAdd.querySelector('.modal__form');
@@ -24,23 +28,19 @@ export const closeModalImage = modalImage.querySelector('.modal__close-button');
 export const modalImageFull = modalImage.querySelector(".modal__image");
 export const modalImageCaption = modalImage.querySelector(".modal__caption");
 
+// Modal Delete
 export const modalDelete = document.querySelector('.modal_delete');
 export const modalDeleteButton = modalDelete.querySelector('.modal__submit-button');
-// export const profileAvatar = document.querySelector('.profile__avatar');
+
+// Modal Avatar
+export const modalAvatar = document.querySelector('.modal_avatar');
+export const avatarSubmit = modalAvatar.querySelector(".modal__submit-button");
 
 // List of Cards
 export const elementsList = document.querySelector('.elements__list');
-export const templateId = document.querySelector('#elements-template');
-// export const modalDelete = document.querySelector('.modal_delete')
-export const profileAvatar = document.querySelector('.profile__avatar');
-export const modalAvatar = document.querySelector('.modal_avatar');
-export const profileAvatarButton = document.querySelector('.profile__avatar-edit');
-export const avatarSubmit = modalAvatar.querySelector(".modal__submit-button");
-
 
 // Array of Initial Cards
 export const initialCards = [];
-
 
 // Validation
 export const validationParams = {
@@ -51,4 +51,3 @@ export const validationParams = {
     inputErrorClass: 'modal__text_type_error',
     errorClass: 'modal__input-error_active'
 }
-

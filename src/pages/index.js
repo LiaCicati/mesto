@@ -52,29 +52,26 @@ const api = new Api({
 
 // Create Modal with Image
 const modalImageFull = new ModalWithImage(modalImage);
-modalImageFull.setEventListeners();
 
 // User Information
 const userProfile = new UserInfo({
-  userNameSelector: profileName,
-  userJobSelector: profileJob,
-  userAvatar: profileAvatar
+  name: profileName,
+  about: profileJob,
+  avatar: profileAvatar
 });
 
 // Get User Data from Server
 api.getUserInfo()
   .then((result) => {
-    userProfile.setUserInfo(result.name, result.about, result._id);
-
+    userProfile.setUserData(result.name, result.about, result._id, result.avatar);
   })
-
 
 // Open Modal Image
 const globalHandleCardClick = (data) => {
   modalImageFull.open(data)
 }
 
-// Like Card
+// Like & Dislike Card
 const globalHandleLikeCardClick = (card) => {
   if (card.isLiked()) {
     api.dislikeCard(card.id())
@@ -89,19 +86,21 @@ const globalHandleLikeCardClick = (card) => {
   }
 }
 
-// Dislike Card
+// Delete Card
 const globalHandleDeleteCardClick = (card) => {
   modalWithDelete.open();
   modalWithDelete.handlerSubmit(() => {
+    modalWithDelete.loading(true);
     api.deleteCard(card.id())
       .then((data) => {
-        card.deleteElement(data)
+        card.deleteElement(data);
+        modalWithDelete.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        modalWithDelete.close();
+        modalWithDelete.loading(false);
       })
   })
 }
@@ -149,7 +148,7 @@ const modalAddPlace = new ModalWithForm({
         const cardElement = card.generateCard();
         addCardsList.addItem(cardElement);
       })
-      .catch((error) => console.error(error))
+      .catch((err) => console.log(err))
       .finally(() => {
         modalAddPlace.loading(false);
         modalAddPlace.close();
@@ -157,7 +156,7 @@ const modalAddPlace = new ModalWithForm({
   }
 }, modalAdd);
 
-// Modal for User Profile
+// Modal for Updating User Profile
 const modalEditProfile = new ModalWithForm({
   handleFormSubmit: ({
     name,
@@ -168,11 +167,11 @@ const modalEditProfile = new ModalWithForm({
         name: name,
         about: about
       })
-      .then((result) => {
-        userProfile.setUserInfo(result.name, result.about)
+      .then((res) => {
+        userProfile.setUserData(res.name, res.about, res._id, res.avatar);
 
       })
-      .catch((error) => console.error(error))
+      .catch((err) => console.log(err))
       .finally(() => {
         modalEditProfile.loading(false);
         modalEditProfile.close();
@@ -181,7 +180,7 @@ const modalEditProfile = new ModalWithForm({
 }, modalEdit)
 
 
-// Modal for User Avatar
+// Modal for Updating User Avatar
 const modalAvatarForm = new ModalWithForm({
   handleFormSubmit: ({
     avatar
@@ -191,7 +190,7 @@ const modalAvatarForm = new ModalWithForm({
         avatar: avatar
       })
       .then((res) => {
-        avatar = res.avatar;
+        userProfile.setUserData(res.name, res.about, res._id, res.avatar);
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -202,17 +201,12 @@ const modalAvatarForm = new ModalWithForm({
 }, modalAvatar)
 
 
-// Get User Avatar
-api.getUserInfo()
-  .then((result) => {
-    userProfile.setUserAvatar(result.avatar);
-  })
-
 // Modal with Delete Confirmation
 const modalWithDelete = new ModalWithDelete(modalDelete);
 
 
 // Event Listeners
+modalImageFull.setEventListeners();
 modalAddPlace.setEventListeners();
 modalEditProfile.setEventListeners();
 modalWithDelete.setEventListeners();
@@ -227,10 +221,11 @@ openModalAdd.addEventListener('click', () => {
 
 
 openmodalEdit.addEventListener('click', () => {
-  const profileInfo = userProfile.getUserInfo();
+  const profileInfo = userProfile.getUserData();
 
   nameInput.value = profileInfo.name;
-  jobInput.value = profileInfo.job;
+  jobInput.value = profileInfo.about;
+
 
   modalProfileFormValidator.hideAllErrors();
   modalProfileFormValidator.addButtonActive(modalEditSave);
