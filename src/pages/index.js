@@ -147,11 +147,11 @@ const modalAddPlace = new ModalWithForm({
         }, userProfile.getUserId(), '#elements-template');
         const cardElement = card.generateCard();
         addCardsList.addItem(cardElement);
+        modalAddPlace.close();
       })
       .catch((err) => console.log(err))
       .finally(() => {
         modalAddPlace.loading(false);
-        modalAddPlace.close();
       })
   }
 }, modalAdd);
@@ -169,12 +169,11 @@ const modalEditProfile = new ModalWithForm({
       })
       .then((res) => {
         userProfile.setUserData(res.name, res.about, res._id, res.avatar);
-
+        modalEditProfile.close();
       })
       .catch((err) => console.log(err))
       .finally(() => {
         modalEditProfile.loading(false);
-        modalEditProfile.close();
       })
   }
 }, modalEdit)
@@ -191,11 +190,11 @@ const modalAvatarForm = new ModalWithForm({
       })
       .then((res) => {
         userProfile.setUserData(res.name, res.about, res._id, res.avatar);
+        modalAvatarForm.close();
       })
       .catch(err => console.log(err))
       .finally(() => {
         modalAvatarForm.loading(false);
-        modalAvatarForm.close();
       })
   }
 }, modalAvatar)
