@@ -18,7 +18,8 @@ import {
   profileAvatarButton,
   modalAvatar,
   avatarSubmit,
-  profileAvatar
+  profileAvatar,
+  initialCards
 } from '../utils/data.js';
 
 import FormValidator from '../components/FormValidator.js';
@@ -28,7 +29,7 @@ import ModalWithImage from '../components/ModalWithImage.js';
 import ModalWithForm from '../components/ModalWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import ModalWithDelete from "../components/ModalWithDelete";
+import ModalConfirm from "../components/ModalConfirm";
 
 
 // Form Validation
@@ -60,11 +61,34 @@ const userProfile = new UserInfo({
   avatar: profileAvatar
 });
 
-// Get User Data from Server
-api.getUserInfo()
-  .then((result) => {
-    userProfile.setUserData(result.name, result.about, result._id, result.avatar);
+// Get User Data & Cards from Server
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+  ])
+  .then((values) => {
+    const [userData, items] = values;
+    userProfile.setUserData(userData.name, userData.about, userData._id, userData.avatar);
+    const initialCardList = new Section({
+        items: items,
+        renderer: (item) => {
+          const card = new Card({
+            data: item,
+            handleCardClick: globalHandleCardClick,
+            handleLikeClick: globalHandleLikeCardClick,
+            handleDeleteButtonClick: globalHandleDeleteCardClick
+          }, userProfile.getUserId(), '#elements-template');
+          const cardElement = card.generateCard();
+          initialCardList.setItem(cardElement);
+        }
+      },
+      '.elements__list');
+    initialCardList.renderItems();
   })
+  .catch((err) => {
+    console.log(err);
+  })
+
 
 // Open Modal Image
 const globalHandleCardClick = (data) => {
@@ -78,10 +102,16 @@ const globalHandleLikeCardClick = (card) => {
       .then((data) => {
         card.setLikesInfo(data)
       })
+      .catch((err) => {
+        console.log(err);
+      })
   } else {
     api.likeCard(card.id())
       .then((data) => {
         card.setLikesInfo(data)
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 }
@@ -105,30 +135,23 @@ const globalHandleDeleteCardClick = (card) => {
   })
 }
 
-// Get Cards from Server
-api.getInitialCards()
-  .then((result) => {
-    const initialCardList = new Section({
-        items: result,
-        renderer: (item) => {
-          const card = new Card({
-            data: item,
-            handleCardClick: globalHandleCardClick,
-            handleLikeClick: globalHandleLikeCardClick,
-            handleDeleteButtonClick: globalHandleDeleteCardClick
-          }, userProfile.getUserId(), '#elements-template');
-          const cardElement = card.generateCard();
-          initialCardList.setItem(cardElement);
+// Render New Card
+const renderCard = (item) => {
+  const card = new Card({
+    data: item,
+    handleCardClick: globalHandleCardClick,
+    handleLikeClick: globalHandleLikeCardClick,
+    handleDeleteButtonClick: globalHandleDeleteCardClick
+  }, userProfile.getUserId(), '#elements-template');
+  const cardElement = card.generateCard();
+  addCardsList.addItem(cardElement);
+  return card;
+}
 
-        }
-      },
-      '.elements__list');
-    initialCardList.renderItems();
-  });
 
 // Section for Cards
 const addCardsList = new Section({
-    items: [],
+    items: initialCards,
   },
   '.elements__list'
 );
@@ -139,14 +162,7 @@ const modalAddPlace = new ModalWithForm({
     modalAddPlace.loading(true);
     api.postNewCard(item)
       .then((item) => {
-        const card = new Card({
-          data: item,
-          handleCardClick: globalHandleCardClick,
-          handleLikeClick: globalHandleLikeCardClick,
-          handleDeleteButtonClick: globalHandleDeleteCardClick
-        }, userProfile.getUserId(), '#elements-template');
-        const cardElement = card.generateCard();
-        addCardsList.addItem(cardElement);
+        renderCard(item);
         modalAddPlace.close();
       })
       .catch((err) => console.log(err))
@@ -155,6 +171,7 @@ const modalAddPlace = new ModalWithForm({
       })
   }
 }, modalAdd);
+
 
 // Modal for Updating User Profile
 const modalEditProfile = new ModalWithForm({
@@ -201,7 +218,7 @@ const modalAvatarForm = new ModalWithForm({
 
 
 // Modal with Delete Confirmation
-const modalWithDelete = new ModalWithDelete(modalDelete);
+const modalWithDelete = new ModalConfirm(modalDelete);
 
 
 // Event Listeners

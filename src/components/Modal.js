@@ -2,6 +2,7 @@ export default class Modal {
     constructor(modalSelector) {
         this._modal = modalSelector;
         this._closeButton = this._modal.querySelector('.modal__close-button');
+        this._submitButton = this._modal.querySelector('.modal__submit-button');
         this._handlerEscClose = this._handlerEscClose.bind(this);
     }
 
@@ -21,12 +22,11 @@ export default class Modal {
         this.close()
     }
 
-    
     loading(loading) {
         if (loading) {
-            this._modal.querySelector('.modal__submit-button').textContent = 'Сохранение...';
+            this._submitButton.textContent = 'Сохранение...';
         } else {
-            this._modal.querySelector('.modal__submit-button').textContent = 'Сохранить';
+            this._submitButton.textContent = 'Сохранить';
         }
     }
 

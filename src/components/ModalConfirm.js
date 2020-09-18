@@ -1,6 +1,6 @@
 import Modal from './Modal.js';
 
-export default class ModalWithDelete extends Modal {
+export default class ModalConfirm extends Modal {
   constructor(modalSelector) {
     super(modalSelector);
     this._formSubmit = this._modal.querySelector('.modal__form');
