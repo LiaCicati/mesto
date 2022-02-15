@@ -1,27 +1,28 @@
-# Проект : Mesto Russia
+# Project : Mesto Russia
 
-### Oписание:
+### Description:
 
-### Cервис где люди делятся фотографиями интересных мест
+### A service where people share photos of interesting places
 
-## Технологии:
+## Technologies:
 
 - ### HTML
 - ### CSS
 - ### JavaScript
+- ### Webpack
 
 ---
 
-- ### Ссылка на сайт :
+- ### Link to the website :
   [ Mesto Russia ](https://liacicati.github.io/mesto/)
 
-## Дополнительная информация:
+## Additional information:
 
-- ### _Ссылка на макет в Figma_
-  [ Макет ](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
-- ### _Редактор исходного кода_: Visual Studio Code
-- ### _Используемая методология_: Методология БЭМ
+- ### _Figma template_
+  [ Template ](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+- ### _Source Code Editor_: Visual Studio Code
+- ### _Methodology used_: BEM Methodology
 
-| Имя        | Email                |
+| Name       | Email                |
 | ---------- | -------------------- |
-| Чикати Лиа | LiaCicati@yandex.com |
+| Lia Cicati | liacicati@gmail.com  |
